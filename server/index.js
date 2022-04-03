@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+require("dotenv").config({ path: "./config.env" });
 const cors = require("cors");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,7 +12,7 @@ const signInRoute = require("./routes/api/signin");
 const createAdminRoute = require("./routes/api/createadmin");
 const verifyRoute = require("./routes/api/verify");
 const logOutRoute = require("./routes/api/logout");
-const addItemRoute = require("./routes/api/addItem");
+const addItemRoute = require("./routes/api/additem");
 const getSpecificItemRoute = require("./routes/api/getspecificitem");
 const updateItemRoute = require("./routes/api/updateitem");
 const deleteItemRoute = require("./routes/api/deleteitem");
@@ -29,16 +30,21 @@ app.use("/api/admin/updateitem", updateItemRoute);
 app.use("/api/admin/deleteitem", deleteItemRoute);
 app.use("/api/admin/getitems", getItemsRoute);
 
-//connect to the database
 mongoose.connect(
-  "mongodb://localhost/inventorysystem",
+  process.env.MONGODB_URI,
   { useUnifiedTopology: true, useNewUrlParser: true },
   () => {
     console.log("Successfuly conneted to mongoDB");
   }
 );
 
-//listen to port
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+const port = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+app.listen(port, () => console.log(`Listening on port ${port}`));

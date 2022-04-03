@@ -53,7 +53,7 @@ class CustomerContent extends Component {
           <h1
             style={{ fontFamily: 'Georgia, "Times New Roman", Times, serif' }}
           >
-            Welcome to Tabby Inventory Expiration Check Management System
+            Welcome to Eddy Inventory Expiration Check Management System
           </h1>
 
           <p>
@@ -67,14 +67,14 @@ class CustomerContent extends Component {
             </button>{" "}
             <div id="demo" class="collapse">
               <h3>
-                Tabby Inventory Management System in created to keep thing on
+                Eddy Inventory Management System in created to keep thing on
                 track by identifying so as to be able to eliminate the items
                 that are almost to go out of date and show already expired
                 items.
               </h3>
               <h3>
                 <p>
-                  Tabby inventory Management System, keeping things on track!!.
+                  Eddy inventory Management System, keeping things on track!!.
                 </p>
               </h3>
             </div>
