@@ -1,8 +1,10 @@
 /node_modules
 /build
 
+config.env
+
 dev.js
-/config.env
+
 
 
 
