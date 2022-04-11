@@ -41,7 +41,7 @@ class Table extends Component {
 
   componentDidMount = () => {
     console.log("Table component has mounted");
-    axios.get("http://localhost:5000/api/admin/getItems").then((res) => {
+    axios.get("/api/admin/getItems").then((res) => {
       this.state.items = res.data.map((data) => data);
       this.setState({
         items: res.data,
@@ -326,31 +326,27 @@ class Table extends Component {
   };
 
   setTableToDelete = (id) => {
-    axios
-      .get("http://localhost:5000/api/getspecificitem?id=" + id)
-      .then((res) => {
-        this.setState({
-          deleteItem: res.data,
-          deleteItemId: id,
-        });
+    axios.get("/api/getspecificitem?id=" + id).then((res) => {
+      this.setState({
+        deleteItem: res.data,
+        deleteItemId: id,
       });
+    });
   };
 
   setDataToUpdate = (id) => {
-    axios
-      .get("http://localhost:5000/api/getspecificitem?id=" + id)
-      .then((res) => {
-        res.data.map((item) => {
-          this.setState({
-            itemName: item.itemName,
-            companyName: item.companyName,
-            itemPrice: item.itemPrice,
-            manufacteringDate: item.manufacteringDate,
-            expiryDate: item.expiryDate,
-            quantity: item.quantity,
-          });
+    axios.get("/api/getspecificitem?id=" + id).then((res) => {
+      res.data.map((item) => {
+        this.setState({
+          itemName: item.itemName,
+          companyName: item.companyName,
+          itemPrice: item.itemPrice,
+          manufacteringDate: item.manufacteringDate,
+          expiryDate: item.expiryDate,
+          quantity: item.quantity,
         });
       });
+    });
   };
 
   getTableToDelete = () => {
@@ -369,7 +365,7 @@ class Table extends Component {
   };
 
   deleteRecord = (id) => {
-    axios.delete("http://localhost:5000/api/admin/deleteitem?id=" + id).then(
+    axios.delete("/api/admin/deleteitem?id=" + id).then(
       this.setState({
         items: this.state.items.filter((item) => item._id !== id),
       })
@@ -378,20 +374,16 @@ class Table extends Component {
 
   updateRecord = (id) => {
     const data = this.state;
-    return axios
-      .patch("http://localhost:5000/api/admin/updateitem?id=" + id, data)
-      .then(
-        this.setState({
-          updated: true,
-        })
-      );
+    return axios.patch("/api/admin/updateitem?id=" + id, data).then(
+      this.setState({
+        updated: true,
+      })
+    );
   };
 
   carReady = (plateNumber) => {
     return axios
-      .patch(
-        "http://localhost:5000/api/admin/carready?plateNumber=" + plateNumber
-      )
+      .patch("/api/admin/carready?plateNumber=" + plateNumber)
       .then((res) => {
         console.log(res);
         console.log(plateNumber);
@@ -400,7 +392,7 @@ class Table extends Component {
 
   render() {
     if (this.state.updated == true) {
-      axios.get("http://localhost:5000/api/admin/getitems").then((res) => {
+      axios.get("/api/admin/getitems").then((res) => {
         this.state.items = res.data.map((data) => data);
         this.setState({
           items: res.data,

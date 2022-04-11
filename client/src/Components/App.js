@@ -25,18 +25,16 @@ class App extends Component {
       const { token } = obj;
       //verify the token
       console.log(token);
-      axios
-        .get("http://localhost:5000/api/admin/verify?token=" + token)
-        .then((res) => {
-          if (res.data.success) {
-            this.setState({
-              signedIn: true,
-              isLoading: false,
-            });
-          }
+      axios.get("/api/admin/verify?token=" + token).then((res) => {
+        if (res.data.success) {
+          this.setState({
+            signedIn: true,
+            isLoading: false,
+          });
+        }
 
-          console.log(this.state);
-        });
+        console.log(this.state);
+      });
     }
   }
 

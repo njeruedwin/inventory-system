@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "../css/admin.css";
-import { Link, Redirect } from "react-router-dom";
-import SignIn from "./SignIn";
 import axios from "axios";
 import Inventory_Manager from "../images/Inventory_Manager.webp";
 import { getFromStorage } from "../utils/storage";
@@ -25,17 +23,15 @@ class Admin extends Component {
       const { token } = obj;
       //verify the token
       console.log(token);
-      axios
-        .get("http://localhost:5000/api/admin/verify?token=" + token)
-        .then((res) => {
-          if (!res.data.success) {
-            this.setState({
-              logOut: true,
-            });
-          }
+      axios.get("/api/admin/verify?token=" + token).then((res) => {
+        if (!res.data.success) {
+          this.setState({
+            logOut: true,
+          });
+        }
 
-          console.log(this.state);
-        });
+        console.log(this.state);
+      });
     }
   }
 

@@ -20,21 +20,19 @@ class PanelNavbar extends Component {
     console.log("log out");
     const obj = getFromStorage("Inventory_app");
     const { token } = obj;
-    axios
-      .get("http://localhost:5000/api/admin/logout?token=" + token)
-      .then((res) => {
-        if (res.data.success) {
-          this.setState({
-            logOut: true,
-          });
-        }
-        console.log(res.data.message);
+    axios.get("/api/admin/logout?token=" + token).then((res) => {
+      if (res.data.success) {
         this.setState({
-          isLoading: false,
+          logOut: true,
         });
-
-        console.log(this.state.logOut);
+      }
+      console.log(res.data.message);
+      this.setState({
+        isLoading: false,
       });
+
+      console.log(this.state.logOut);
+    });
   }
 
   render() {

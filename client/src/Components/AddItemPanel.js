@@ -83,7 +83,7 @@ class ItemForm extends Component {
     const item = this.state;
     console.log(item);
 
-    axios.post("http://localhost:5000/api/admin/additem", item).then((res) => {
+    axios.post("/api/admin/additem", item).then((res) => {
       if (!res.data.success) {
         return this.setState({
           errorMessage: res.data.message,
