@@ -10,9 +10,7 @@ import PrintReport from "../Components/printingcomponents/PrintReport";
 import Table from "../Components/table/Table";
 
 class RegisterPanel extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
 
   render() {
     return (

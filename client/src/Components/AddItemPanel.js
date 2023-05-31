@@ -110,7 +110,7 @@ class ItemForm extends Component {
           </div>
           <div className="panel-body">
             <div>
-              <form class="bs-example bs-example-form" role="form">
+              <div class="bs-example bs-example-form" role="form">
                 <div class="input-group">
                   <div class="alert alert-danger">
                     <button
@@ -206,7 +206,7 @@ class ItemForm extends Component {
                     Submit
                   </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

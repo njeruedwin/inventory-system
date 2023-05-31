@@ -7,7 +7,7 @@ On the server folder run 'npm install' to install the server node modules
 run npm run dev to start the application
 
 to view the application click on the following link below:
-https://expirycheckinventorysystem.herokuapp.com/
+
 
 login credentials:
 username: eddy  

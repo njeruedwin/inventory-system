@@ -24,45 +24,46 @@ router.post("/", (req, res) => {
   }
 
   //make sure that the username does not exist
-  Admin.find({ userName: userName }, (err, admins) => {
-    if (err) {
-      res.send({
-        success: false,
-        message: "Server Error",
-      });
-    }
-
-    if (admins != 0) {
-      res.send({
-        success: false,
-        message: "The username already exists",
-      });
-    }
-
-    //the admin is new
-    //save the admin
-    const newAdmin = new Admin({
-      userName,
-      password,
-    });
-
-    //encrypt the password
-    newAdmin.password = newAdmin.generateHash(password);
-
-    newAdmin.save((err, admin) => {
-      if (err) {
-        return res.send({
+  Admin.find({ userName: userName })
+    .then((admins) => {
+      if (admins != 0) {
+        res.send({
           success: false,
-          message: "Server Error",
+          message: "The username already exists",
         });
       }
 
+      //the admin is new
+      //save the admin
+      const newAdmin = new Admin({
+        userName,
+        password,
+      });
+
+      //encrypt the password
+      newAdmin.password = newAdmin.generateHash(password);
+
+      newAdmin
+        .save()
+        .then((admin) => {
+          res.send({
+            success: true,
+            message: "New Admin Registered",
+          });
+        })
+        .catch((err) => {
+          return res.send({
+            success: false,
+            message: "Server Error",
+          });
+        });
+    })
+    .catch((error) => {
       res.send({
-        success: true,
-        message: "New Admin Registered",
+        success: false,
+        message: error,
       });
     });
-  });
 });
 
 module.exports = router;

@@ -42,7 +42,7 @@ class Table extends Component {
   componentDidMount = () => {
     console.log("Table component has mounted");
     axios.get("/api/admin/getItems").then((res) => {
-      this.state.items = res.data.map((data) => data);
+      
       this.setState({
         items: res.data,
       });
@@ -222,7 +222,7 @@ class Table extends Component {
               </div>
               <div class="modal-body ">
                 <div>
-                  <form class="bs-example bs-example-form" role="form">
+                  <div class="bs-example bs-example-form" role="form">
                     <div class="input-group">
                       <div class="alert alert-info">
                         <button
@@ -292,7 +292,7 @@ class Table extends Component {
                     </div>
                     <br />
                     <div className="input-group"></div>
-                  </form>
+                  </div>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -337,7 +337,7 @@ class Table extends Component {
   setDataToUpdate = (id) => {
     axios.get("/api/getspecificitem?id=" + id).then((res) => {
       res.data.map((item) => {
-        this.setState({
+        return this.setState({
           itemName: item.itemName,
           companyName: item.companyName,
           itemPrice: item.itemPrice,
@@ -391,9 +391,9 @@ class Table extends Component {
   };
 
   render() {
-    if (this.state.updated == true) {
+    if (this.state.updated === true) {
       axios.get("/api/admin/getitems").then((res) => {
-        this.state.items = res.data.map((data) => data);
+   
         this.setState({
           items: res.data,
           updated: false,

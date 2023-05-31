@@ -46,25 +46,25 @@ class PanelNavbar extends Component {
           <ul class="nav navbar-nav">
             <li>
               <Link to="/admin">
-                <a style={{ textDecoration: "none" }}>Register Panel</a>
+                <span style={{ textDecoration: "none" }}>Register Panel</span>
               </Link>
             </li>
 
             <li>
-              <a href="#"></a>
+              <span></span>
             </li>
 
             <li>
               <Link to="/additem">
-                <a href="#" style={{ textDecoration: "none" }}>
+                <span style={{ textDecoration: "none" }}>
                   Add Item Panel
-                </a>
+                </span>
               </Link>
             </li>
             <li style={{ display: "flex", paddingLeft: "550px" }}>
-              <a style={{ textDecoration: "none" }} onClick={this.handleLogOut}>
+              <span style={{ textDecoration: "none" }} onClick={this.handleLogOut}>
                 Log Out
-              </a>
+              </span>
             </li>
           </ul>
         </div>

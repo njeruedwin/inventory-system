@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import axios from "axios";
 
 class ComponentToPrint extends React.Component {
@@ -16,7 +16,7 @@ class ComponentToPrint extends React.Component {
   componentDidMount = () => {
     console.log("Table component has mounted");
     axios.get("/api/admin/getItems").then((res) => {
-      this.state.items = res.data.map((data) => data);
+     
       this.setState({
         items: res.data,
       });
