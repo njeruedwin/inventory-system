@@ -63,10 +63,10 @@ router.post("/", (req, res) => {
         message: "New item saved",
       });
     })
-    .catch((err) => {
+    .catch((error) => {
       return res.send({
         success: false,
-        message: "Server Error",
+        message: error,
       });
     });
 });

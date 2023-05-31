@@ -4,16 +4,16 @@ const router = express.Router();
 const Item = require("../../models/Item");
 
 router.get("/", (req, res) => {
-  Item.find({}, (err, items) => {
-    if (err) {
+  Item.find({})
+    .then((items) => {
+      res.send(items);
+    })
+    .catch((error) => {
       return res.send({
         success: false,
-        message: "Server Error",
+        message: error,
       });
-    }
-
-    res.send(items);
-  });
+    });
 });
 
 module.exports = router;

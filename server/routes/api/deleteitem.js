@@ -8,10 +8,10 @@ router.delete("/", (req, res) => {
     .then((doc) => {
       res.send(doc);
     })
-    .catch((err) => {
+    .catch((error) => {
       return res.send({
         success: false,
-        message: "Server Error",
+        message: error,
       });
     });
 });
