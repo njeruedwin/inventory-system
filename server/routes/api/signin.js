@@ -60,20 +60,21 @@ router.post("/", (req, res) => {
 
     //save the new user session
 
-    newAdminSession.save((err, session) => {
-      if (err) {
+    newAdminSession
+      .save()
+      .then((session) => {
+        res.send({
+          success: true,
+          message: "User Successfully Signed In",
+          token: session.id,
+        });
+      })
+      .catch((error) => {
         return res.send({
           success: false,
-          message: "Server Error",
+          message: error,
         });
-      }
-
-      res.send({
-        success: true,
-        message: "User Successfully Signed In",
-        token: session.id,
       });
-    });
   });
 });
 
