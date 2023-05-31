@@ -1,7 +1,7 @@
 /node_modules
 /build
 
-config.env
+.env
 
 dev.js
 

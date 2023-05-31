@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 require("dotenv").config();
-const {MONGODB_URI} = require('./config') //get access to the mongoDB
+const {MONGO_URI} = require('./config') //get access to the mongoDB
 
 const cors = require("cors");
 const app = express();
@@ -34,9 +34,9 @@ app.use("/api/admin/deleteitem", deleteItemRoute);
 app.use("/api/admin/getitems", getItemsRoute);
 
 mongoose.connect(
-  MONGODB_URI,
+  MONGO_URI,
   { useUnifiedTopology: true, useNewUrlParser: true }
-).then(console.log(`successfully connected to ${MONGODB_URI}`))
+).then(console.log('successfully connected to MongoDB'))
 
 const port = process.env.PORT || 5000;
 
