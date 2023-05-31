@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import Inventory_Manager from "../images/Inventory_Manager.webp";
 import { setInStorage } from "../utils/storage";
 
+import {environment} from '../environment/environment.prod'
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,8 @@ class SignIn extends Component {
       signInError: "",
       signedIn: false,
     };
+
+    this.API = environment.API;
 
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -44,7 +48,7 @@ class SignIn extends Component {
       password,
     };
 
-    axios.post("/api/admin/signIn", data).then((res) => {
+    axios.post(`${this.API}/api/admin/signIn`, data).then((res) => {
       const { success, message, token } = res.data;
       if (!success) {
         return this.setState({

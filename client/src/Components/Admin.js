@@ -5,6 +5,8 @@ import Inventory_Manager from "../images/Inventory_Manager.webp";
 import { getFromStorage } from "../utils/storage";
 import RegisterPanel from "../Components/RegisterPanel";
 
+import {environment} from '../environment/environment.prod'
+
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,8 @@ class Admin extends Component {
       signedIn: true,
       isLoading: true,
     };
+
+    this.API = environment.API;
   }
 
   componentDidMount() {
@@ -23,7 +27,7 @@ class Admin extends Component {
       const { token } = obj;
       //verify the token
       console.log(token);
-      axios.get("/api/admin/verify?token=" + token).then((res) => {
+      axios.get(`${this.API}/api/admin/verify?token=` + token).then((res) => {
         if (!res.data.success) {
           this.setState({
             logOut: true,

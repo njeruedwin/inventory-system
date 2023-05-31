@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import {environment} from '../environment/environment.prod'
+
 class ComponentToPrint extends React.Component {
   constructor(props) {
     super(props);
@@ -9,13 +11,15 @@ class ComponentToPrint extends React.Component {
       items: [],
     };
 
+    this.API = environment.API
+
     this.registerTable = this.registerTable.bind(this);
     this.calculateDaysLeft = this.calculateDaysLeft.bind(this);
   }
 
   componentDidMount = () => {
     console.log("Table component has mounted");
-    axios.get("/api/admin/getItems").then((res) => {
+    axios.get(`${this.API}/api/admin/getItems`).then((res) => {
      
       this.setState({
         items: res.data,

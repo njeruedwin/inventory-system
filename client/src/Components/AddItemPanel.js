@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import PanelNavbar from "../Components/PanelNavbar";
 import Inventory_Manager from "../images/Inventory_Manager.webp";
 
+import {environment} from '../environment/environment.prod'
+
 import "../css/admin.css";
 import axios from "axios";
 
@@ -55,6 +57,8 @@ class ItemForm extends Component {
       submit: false,
     };
 
+    this.API = environment.API;
+
     this.onValueChange = this.onValueChange.bind(this);
     this.onManufacterDateChange = this.onManufacterDateChange.bind(this);
     this.onExpiryDateChange = this.onExpiryDateChange.bind(this);
@@ -83,7 +87,7 @@ class ItemForm extends Component {
     const item = this.state;
     console.log(item);
 
-    axios.post("/api/admin/additem", item).then((res) => {
+    axios.post(`${this.API}/api/admin/additem`, item).then((res) => {
       if (!res.data.success) {
         return this.setState({
           errorMessage: res.data.message,

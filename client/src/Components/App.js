@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import { getFromStorage } from "../utils/storage";
 
+import {environment} from '../environment/environment.prod'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,8 @@ class App extends Component {
       isLoading: true,
     };
 
+    this.API = environment.API;
+    
     this.handleSignIn = this.handleSignIn.bind(this);
   }
 
@@ -24,7 +28,7 @@ class App extends Component {
       const { token } = obj;
       //verify the token
       console.log(token);
-      axios.get("/api/admin/verify?token=" + token).then((res) => {
+      axios.get(`${this.API}/api/admin/verify?token=` + token).then((res) => {
         if (res.data.success) {
           this.setState({
             signedIn: true,

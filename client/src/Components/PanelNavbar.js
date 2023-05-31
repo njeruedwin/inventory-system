@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import { getFromStorage } from "../utils/storage";
 import axios from "axios";
 
+import {environment} from '../environment/environment.prod'
+
 class PanelNavbar extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,8 @@ class PanelNavbar extends Component {
       isLoading: true,
     };
 
+    this.API = environment.API;
+
     this.handleLogOut = this.handleLogOut.bind(this);
   }
 
@@ -20,7 +24,7 @@ class PanelNavbar extends Component {
     console.log("log out");
     const obj = getFromStorage("Inventory_app");
     const { token } = obj;
-    axios.get("/api/admin/logout?token=" + token).then((res) => {
+    axios.get(`${this.API}/api/admin/logout?token=` + token).then((res) => {
       if (res.data.success) {
         this.setState({
           logOut: true,

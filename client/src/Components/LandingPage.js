@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Inventory_Manager from "../images/Inventory_Manager.webp";
 
+
+
 class LandingPage extends Component {
   render() {
     return (
