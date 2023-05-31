@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import {environment} from '../../environment/environment.prod'
+import { environment } from "../../environment/environment.prod";
 
 class Table extends Component {
   constructor() {
@@ -23,7 +23,7 @@ class Table extends Component {
       updated: false,
     };
 
-    this.API= environment.API;
+    this.API = environment.API;
 
     this.registerTable = this.registerTable.bind(this);
     this.calculateDaysLeft = this.calculateDaysLeft.bind(this);
@@ -43,14 +43,24 @@ class Table extends Component {
     //this.carReady = this.carReady.bind(this);
   }
 
-  componentDidMount = () => {
+  componentDidMount(){
     console.log("Table component has mounted");
     axios.get(`${this.API}/api/admin/getItems`).then((res) => {
-      
       this.setState({
         items: res.data,
       });
     });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.updated !== this.state.updated) {
+      console.log("Table component has updated");
+      axios.get(`${this.API}/api/admin/getItems`).then((res) => {
+        this.setState({
+          items: res.data,
+        });
+      });
+    }
   };
 
   registerTable = () => {
@@ -397,7 +407,6 @@ class Table extends Component {
   render() {
     if (this.state.updated === true) {
       axios.get(`${this.API}/api/admin/getitems`).then((res) => {
-   
         this.setState({
           items: res.data,
           updated: false,
