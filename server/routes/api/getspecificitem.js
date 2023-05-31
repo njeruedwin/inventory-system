@@ -7,23 +7,23 @@ router.get("/", (req, res) => {
   const { query } = req;
   const { id } = query;
 
-  Item.find({ _id: id }, (err, items) => {
-    if (err) {
+  Item.find({ _id: id })
+    .then((err, items) => {
+      if (items == 0) {
+        return res.send({
+          success: false,
+          message: "Item does not exist",
+        });
+      }
+
+      res.send(items);
+    })
+    .catch((error) => {
       return res.send({
         success: false,
-        message: "Server Error",
+        message: error,
       });
-    }
-
-    if (items == 0) {
-      return res.send({
-        success: false,
-        message: "Item does not exist",
-      });
-    }
-
-    res.send(items);
-  });
+    });
 });
 
 module.exports = router;
