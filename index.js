@@ -1,22 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-require("dotenv").config({ path: "./config.env" });
+
+require("dotenv").config();
+const {MONGODB_URI} = require('./config') //get access to the mongoDB
+
 const cors = require("cors");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 //import routes
-const signInRoute = require("./routes/api/signin");
-const createAdminRoute = require("./routes/api/createadmin");
-const verifyRoute = require("./routes/api/verify");
-const logOutRoute = require("./routes/api/logout");
-const addItemRoute = require("./routes/api/additem");
-const getSpecificItemRoute = require("./routes/api/getspecificitem");
-const updateItemRoute = require("./routes/api/updateitem");
-const deleteItemRoute = require("./routes/api/deleteitem");
-const getItemsRoute = require("./routes/api/getitems");
+const signInRoute = require("./server/routes/api/signin");
+const createAdminRoute = require("./server/routes/api/createadmin");
+const verifyRoute = require("./server/routes/api/verify");
+const logOutRoute = require("./server/routes/api/logout");
+const addItemRoute = require("./server/routes/api/additem");
+const getSpecificItemRoute = require("./server/routes/api/getspecificitem");
+const updateItemRoute = require("./server/routes/api/updateitem");
+const deleteItemRoute = require("./server/routes/api/deleteitem");
+const getItemsRoute = require("./server/routes/api/getitems");
 const { verify } = require("jsonwebtoken");
 
 //set routes
@@ -31,12 +34,9 @@ app.use("/api/admin/deleteitem", deleteItemRoute);
 app.use("/api/admin/getitems", getItemsRoute);
 
 mongoose.connect(
-  process.env.MONGODB_URI,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  () => {
-    console.log("Successfuly conneted to mongoDB");
-  }
-);
+  MONGODB_URI,
+  { useUnifiedTopology: true, useNewUrlParser: true }
+).then(console.log(`successfully connected to ${MONGODB_URI}`))
 
 const port = process.env.PORT || 5000;
 
