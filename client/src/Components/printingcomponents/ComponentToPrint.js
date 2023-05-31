@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import {environment} from '../environment/environment.prod'
+import {environment} from '../../environment/environment.prod'
 
 class ComponentToPrint extends React.Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import {environment} from '../environment/environment.prod'
+import {environment} from '../../environment/environment.prod'
 
 class Table extends Component {
   constructor() {
