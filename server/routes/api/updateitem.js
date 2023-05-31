@@ -26,21 +26,20 @@ router.patch("/", (req, res) => {
         expiryDate,
         quantity,
       },
-    },
-    (err, item) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: "Server Error",
-        });
-      }
-
+    }
+  )
+    .then((item) => {
       res.send({
         success: true,
         message: "Item successfuly updated",
       });
-    }
-  );
+    })
+    .catch((error) => {
+      return res.send({
+        success: false,
+        message: error,
+      });
+    });
 });
 
 module.exports = router;
