@@ -19,15 +19,9 @@ router.get("/", (req, res) => {
     },
     {
       $set: { isValid: false },
-    },
-
-    (err, session) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: "Server Error",
-        });
-      }
+    }
+  )
+    .then((session) => {
       if (session == null) {
         return res.send({
           success: false,
@@ -39,7 +33,12 @@ router.get("/", (req, res) => {
         success: true,
         message: "Logged Out",
       });
-    }
-  );
+    })
+    .catch((error) => {
+      return res.send({
+        success: false,
+        message: error,
+      });
+    });
 });
 module.exports = router;
