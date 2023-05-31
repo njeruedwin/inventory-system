@@ -16,26 +16,25 @@ router.get("/", (req, res) => {
     {
       _id: token,
       isValid: true,
-    },
-    (err, session) => {
-      if (err) {
-        return res.send({
-          success: false,
-          message: "Server Error",
-        });
-      }
-      if (session == 0) {
-        return res.send({
-          success: false,
-          message: "Session does not exist",
-        });
-      }
-
-      res.send({
-        success: true,
-        message: "In Session",
+    }
+  ).then( (session) => {
+    
+    if (session == 0) {
+      return res.send({
+        success: false,
+        message: "Session does not exist",
       });
     }
-  );
+
+    res.send({
+      success: true,
+      message: "In Session",
+    });
+  }).catch((error) => {
+    return res.send({
+      success: false,
+      message: error,
+    });
+  });
 });
 module.exports = router;
