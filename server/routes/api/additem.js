@@ -55,19 +55,20 @@ router.post("/", (req, res) => {
     quantity,
   });
 
-  newItem.save((err, item) => {
-    if (err) {
+  newItem
+    .save()
+    .then((item) => {
+      res.send({
+        success: true,
+        message: "New item saved",
+      });
+    })
+    .catch((err) => {
       return res.send({
         success: false,
         message: "Server Error",
       });
-    }
-
-    res.send({
-      success: true,
-      message: "New item saved",
     });
-  });
 });
 
 module.exports = router;
