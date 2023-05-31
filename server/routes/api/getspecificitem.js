@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   const { id } = query;
 
   Item.find({ _id: id })
-    .then((err, items) => {
+    .then((items) => {
       if (items == 0) {
         return res.send({
           success: false,
