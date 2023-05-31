@@ -27,13 +27,8 @@ router.post("/", (req, res) => {
   } //field are not empty
 
   //make sure that the admin exists
-  Admin.find({ userName: userName }, (err, admins) => {
-    if (err) {
-      return res.send({
-        success: false,
-        message: "Server Error",
-      });
-    }
+  Admin.find({ userName: userName }).then((admins) => {
+    
     if (admins == 0) {
       return res.send({
         success: false,
@@ -75,6 +70,11 @@ router.post("/", (req, res) => {
           message: error,
         });
       });
+  }).catch((error) =>  {
+    return res.send({
+      success: false,
+      message: error,
+    });
   });
 });
 
